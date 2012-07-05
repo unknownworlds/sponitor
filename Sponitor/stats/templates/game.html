@@ -1,0 +1,33 @@
+{% extends "body.html" %}
+{% load static %}
+
+{% block javascript %}
+	{% include "javascript.html" %}
+	<script type="text/javascript" src="{% get_static_prefix %}js/core.js"></script>
+	<script type="text/javascript" src="{% get_static_prefix %}js/game.js"></script>
+{% endblock %}
+
+{% block menu %}
+	{% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+<h1 id="title">Game statistics</h1>
+<div class="LEFT">
+	<h2>Win</h2>
+	<div id="winChart" style="width:300px;height:300px"></div>
+</div>
+<div class="LEFT">
+	<h2>Kill</h2>
+	<div id="killChart" style="width:300px;height:300px"></div>
+</div>
+<div class="LEFT">
+	<h2>Win by Length</h2>
+	<p class="delta">delta time : <a href="{{ current_url }}#delta=5">5</a> - <a href="{{ current_url }}#delta=10">10</a> - <a href="{{ current_url }}#delta=20">20</a></p>
+	<div id="winLengthChart" style="width:500px;height:800px"></div>
+</div>
+<div class="LEFT">
+	<h2>Average lifetime</h2>
+	<div id="avg-lifetime"></div>
+</div>
+{% endblock %}

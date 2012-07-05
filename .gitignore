@@ -1,0 +1,6 @@
+.env
+*.sublime-*
+static/*
+Sponitor/Sponitor/settings_local.py
+Sp_ENV
+*.pyc

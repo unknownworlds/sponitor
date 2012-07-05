@@ -1,0 +1,16 @@
+{% extends "head.html" %}
+
+{% block body %}	
+<div id="menu">
+	<p><a href="/">Home</a></p>
+	<p><a href="/login">Login</a></p>
+	<p><a href="/logout">Logout</a></p>
+	{% block menu %}
+	{% endblock %}
+</div>
+
+<div id="content" style="float:left;">
+	{% block content %}
+	{% endblock %}
+</div>
+{% endblock %}

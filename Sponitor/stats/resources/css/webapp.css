@@ -1,0 +1,125 @@
+/**
+ * Webapp for Natural Selection 2 statistics
+ * 
+ * created by Marc Delorme (marc@unknownworlds.com)
+ * 
+ * © Unknownworlds Entertainment 2012
+ */
+
+body {
+	font-size: 0.8em;
+}
+
+/* Tool */
+.LEFT {
+    float: left;
+}
+
+.RIGHT {
+    float: right;
+}
+
+/* Title */
+header.ui-widget-header {
+	padding: 0.8em;
+	margin-bottom: 8px;
+}
+
+header.ui-widget-header h1 {
+	margin: 0;
+    font-size: 1.6em;
+}
+
+h2.ui-widget-header {
+	padding: 0.3em;
+	font-size: 1em;
+}
+
+/* Menu */
+#main-menu {
+	width: 250px;
+	float: left;
+}
+
+#main-menu ul {
+    list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#main-menu ul li a {
+    display: block;
+	padding: 1px 8px 4px;
+	color: #1B75BB;
+	text-decoration: none;
+	border-bottom: 1px dotted #B3B3B3;
+}
+
+#main-menu ul li a:hover {
+	border-bottom: 1px dotted #B3B3B3;
+	background-color: #e0e0e0;
+}
+
+#main-menu ul li a.menu-item-on, #main-menu ul li a.menu-item-on:hover {
+	background-color: #E8A323;
+	-webkit-border-radius: 5px;
+	color: #fff;
+	font-weight: bold;
+}
+
+header {
+	display: -webkit-box;
+	-webkit-box-orient: horizontal;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+}
+
+.header-left {
+	-webkit-box-flex: 2;
+}
+
+.header-right {
+	-webkit-box-flex: 1;
+	text-align: right;
+}
+
+/* Page */
+#page {
+	margin-left: 280px;
+}
+
+#filters {
+    display: -webkit-box; 
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch; 
+}
+
+.filter-parent {
+    display: -webkit-box; 
+    -webkit-box-orient: horizontal;
+}
+
+#filters-widget {
+    margin-bottom: 10px
+}
+
+.filter {
+   text-align: center;
+   -webkit-box-flex: 1;
+}
+
+.filter-1 select{
+	color: white;
+    background-color: #3366cc;
+}
+
+.filter-2 select{
+    background-color: #dc3912;
+    color: white;
+}
+
+
+/* Override jQuery UI */
+.ui-widget-content {
+    padding: 8px;
+}

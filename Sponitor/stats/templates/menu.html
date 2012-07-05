@@ -1,0 +1,22 @@
+<h3>Versions</h3>
+<ul class="versions">
+	<li>
+		<a href="{{ current_url }}">all</a>
+	</li>
+	{% for v in versions %}
+	<li>
+		<a href="{{ current_url }}#version={{ v }}">{{ v }}</a>
+	</li>
+	{% endfor %}
+</ul>
+<h3>Maps</h3>
+<ul class="maps">
+	<li>
+		<a href="{{ current_url }}">all</a>
+	</li>
+	{% for m in maps %}
+	<li>
+		<a href="{{ current_url }}#map={{ m }}">{{ m }}</a>
+	</li>
+	{% endfor %}
+</ul>

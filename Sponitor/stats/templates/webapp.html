@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>NS2 Statistics App</title>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript" src="{% get_static_prefix %}js/lib/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="{% get_static_prefix %}js/lib/underscore-min.js"></script>
+		<script type="text/javascript" src="{% get_static_prefix %}js/lib/backbone-min.js"></script>
+		<script type="text/javascript" src="{% get_static_prefix %}js/lib/jquery.flot.min.js"></script>
+		<script type="text/javascript" src="{% get_static_prefix %}js/lib/jquery.flot.pie.min.js"></script>
+		<script type="text/javascript" src="{% get_static_prefix %}js/lib/jquery.flot.stack.min.js"></script>
+		<script type="text/javascript" src="{% get_static_prefix %}js/lib/jquery.json-2.3.min.js"></script>
+		<script src="{% get_static_prefix %}js/lib/jquery-ui-1.8.18.custom.min.js"></script>
+		
+		<link rel="stylesheet" href="{% get_static_prefix %}css/suns-theme/jquery-ui-1.8.18.custom.css">		
+		<link rel="stylesheet" href="{% get_static_prefix %}css/webapp.css">
+		
+		<script type="text/javascript" src="{% get_static_prefix %}js/webapp.js"></script>
+		<script type="text/javascript">
+	      	google.load('visualization', '1.0', {'packages':['corechart']});
+		  	$(function() {
+		    	google.setOnLoadCallback(function() {
+		    		StatApp.start();
+		    	});
+		    });
+    	</script>
+
+	</head>
+	<body>
+		<header class="ui-widget-header ui-widget ui-corner-all header-column">
+			<div class="header-left">
+				<h1 >Natural Selection 2: Statistics</h1>
+			</div>
+			<div class="header-right">
+				<button id="config-button">Config</button>
+			</div>	
+		</header>		
+		<div id="main-menu" class="ui-widget ui-widget-content ui-corner-all">
+			<div class="menu-list">
+			</div>
+		</div>
+		<div id="page">
+			<div class="ui-widget ui-widget-content ui-corner-all" id="filters-widget">
+				<div id="filters">
+					<div class="filter" id="filter-versions"></div>
+					<div class="filter" id="filter-maps"></div>
+					<div class="filter-parent" id="filter-type">
+						<div class="filter filter-1 ui-corner-all" id="filter-type-1"></div>
+						<div class="filter filter-2 ui-corner-all" id="filter-type-2"></div>
+					</div>
+					<div class="filter-parent" id="location-type">
+						<div class="filter filter-1 ui-corner-all" id="filter-location-1"></div>
+						<div class="filter filter-2 ui-corner-all" id="filter-location-2"></div>
+					</div>
+				</div>
+			</div>
+			<div id="content" class="ui-widget-content ui-widget ui-corner-all">
+				<h2>Welcome</h2>
+			</div>
+		</div>
+		
+		<footer>
+			<p>
+				<!-- Copyright © 2003-2012, Unknown Worlds Entertainment, Inc. All rights reserved. -->
+			</p>
+		</footer>
+		
+		<!-- Template -->
+		<script id="pieTmp" type="text/template">
+        	<h2 class="ui-widget ui-widget-header ui-corner-all"><%- title %></h2>
+        	<div style="text-align: center;">
+        		<div class="pieChart" ></div>
+        	</div>
+		</script>
+
+	</body>
+</html>
