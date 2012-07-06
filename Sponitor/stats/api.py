@@ -163,7 +163,9 @@ def performance(request):
     perf.save()
 
     Activity.getTodayActivity().increment('performance').save()
-    Framerate.getFramerate(perf.version, perf.address).addFPS(perf.clientavg).save()
+
+    fps = { 'average' : perf.clientavg, 'minimum' : perf.clientmin, 'maximum' : perf.clientmax }
+    Framerate.getFramerate(perf.version, perf.address).addFPS(fps).save()
 
 
     return HttpResponse('saved')

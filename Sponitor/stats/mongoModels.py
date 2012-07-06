@@ -148,6 +148,8 @@ class Framerate(Document):
     version    = StringField(max_length=255)
     address    = StringField(max_length=255)
     average    = FloatField(default=0)
+    minimum    = FloatField(default=0)
+    maximum    = FloatField(default=0)
     count      = IntField(default=0)
     createDate = DateTimeField()
     updateDate = DateTimeField()
@@ -174,7 +176,9 @@ class Framerate(Document):
         super(Framerate, self).save()
 
     def addFPS(self, fps):
-        self.average = (self.average * self.count + fps) / (self.count + 1)
+        self.average = (self.average * self.count + fps['average']) / (self.count + 1)
+        self.minimum = (self.minimum * self.count + fps['minimum']) / (self.count + 1)
+        self.maximum = (self.maximum * self.count + fps['maximum']) / (self.count + 1)
         self.count += 1
 
         return self

@@ -250,21 +250,36 @@ class APITest(TestCase):
     def test_framerate(self):
         ver = "192"
         addr = "127.0.0.1"
-        fps = 23
+        fps = { 'average' : 23.0, 'minimum' : 2.0, 'maximum' : 48.0 }
+        fps1 = { 'average' : 40.0, 'minimum' : 7.0, 'maximum' : 62.0 }
+        fps2 = { 'average' : 50.0, 'minimum' : 11.0, 'maximum' : 76.0 }
+        fps3 = { 'average' : 32.0, 'minimum' : 4.0, 'maximum' : 53.0 }
         initAvg =  Framerate.getFramerate(ver, addr).average
+        initMin =  Framerate.getFramerate(ver, addr).minimum
+        initMax =  Framerate.getFramerate(ver, addr).maximum
         initCount = Framerate.getFramerate(ver, addr).count
 
         Framerate.getFramerate(ver, addr).addFPS(fps).save()
 
         framerate = Framerate.objects.create(version="208", address="192.168.0.1")
-        framerate.addFPS(40.0)
-        framerate.addFPS(50.0)
-        framerate.addFPS(32.0)
+        framerate.addFPS(fps1)
+        framerate.addFPS(fps2)
+        framerate.addFPS(fps3)
 
         self.assertEqual(framerate.average, (40.0+50.0+32.0) / 3)
+        self.assertEqual(framerate.minimum, (7.0+11.00+4.0) / 3)
+        self.assertEqual(framerate.maximum, (62.0+76.0+53.0) / 3)
         self.assertEqual(
             Framerate.getFramerate(ver, addr).average, 
-            (initCount * initAvg + fps) / (initCount + 1) 
+            (initCount * initAvg + fps['average']) / (initCount + 1) 
+        )
+        self.assertEqual(
+            Framerate.getFramerate(ver, addr).minimum, 
+            (initCount * initMin + fps['minimum']) / (initCount + 1) 
+        )
+        self.assertEqual(
+            Framerate.getFramerate(ver, addr).maximum, 
+            (initCount * initMax + fps['maximum']) / (initCount + 1) 
         )
 
 
