@@ -1,0 +1,3 @@
+Sponitor is a web application to store and process statistics data send by Spark Engine.
+The graph are display with web technology using the Google Charts API
+
