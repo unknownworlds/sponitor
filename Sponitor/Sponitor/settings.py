@@ -4,7 +4,9 @@ import os
 
 if "SPONITOR" in os.environ and os.environ["SPONITOR"] == "heroku":
     from settings_heroku import *
+    print "heroku environment detected"
 else:
+    print "Local environment detected"
     from settings_local import *
 
 if "SPONITORDEBUG" in os.environ and os.environ["SPONITORDEBUG"] == "1":
@@ -17,7 +19,7 @@ TEMPLATE_DEBUG = DEBUG
 MANAGERS = ADMINS
 
 if STAGE =="production":
-    DATABASES = {}
+    # DATABASES = {}
 else:
     DATABASES = {
         'default': {
