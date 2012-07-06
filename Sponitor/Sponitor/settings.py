@@ -20,6 +20,7 @@ MANAGERS = ADMINS
 
 if STAGE =="production":
     # DATABASES = {}
+    pass
 else:
     DATABASES = {
         'default': {
