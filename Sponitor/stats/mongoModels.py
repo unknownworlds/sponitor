@@ -107,7 +107,7 @@ class Kill(Document):
     attacker_weapon      = StringField(max_length=255)
     attacker_weaponlevel = IntField()
     attacker_armorlevel  = IntField()
-    attacker_upgrade     = ListField(field=StringField() )
+    attacker_upgrade     = ListField(field=StringField())
     attackerx            = FloatField()
     attackery            = FloatField()
     attackerz            = FloatField()
@@ -116,7 +116,7 @@ class Kill(Document):
     target_weapon        = StringField(max_length=255)
     target_weaponlevel   = IntField()
     target_armorlevel    = IntField()
-    target_upgrade       = ListField(field=StringField() )
+    target_upgrade       = ListField(field=StringField())
     targetx              = FloatField()
     targety              = FloatField()
     targetz              = FloatField()
@@ -226,5 +226,20 @@ class Activity(Document):
             activity = cls.objects.create()
 
         return activity
+
+class Location(Document):
+    version     = StringField(max_length=255)
+    mapName     = StringField(max_length=255)
+    x           = FloatField()
+    y           = FloatField()
+    z           = FloatField()
+    message     = StringField()
+
+    meta = {
+        'indexes' : ['version', 'mapName'],
+        'queryset_class': MyQuerySet
+    }
+
+
 
 

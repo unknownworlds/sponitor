@@ -2,6 +2,6 @@
 *.sublime-*
 static/*
 Sponitor/Sponitor/settings_local.py
-Sp_ENV
+.Sp_ENV
 *.pyc
 void_db

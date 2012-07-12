@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.test.client import Client
 
-from stats.mongoModels import Kill, EndGame, Performance, CPU, Activity, Framerate
+from stats.mongoModels import Kill, EndGame, Performance, CPU, Activity, Framerate, Location
 from stats.mongoModels import MyQuerySet
 from stats import statsTools
 
@@ -22,7 +22,7 @@ class Post(Document):
     }
 
 def testAttr(testClass, obj, data):
-    for key, val in data.items():
+    for key, val in data.iteritems():
         attr = key
 
         if key == "map":
@@ -32,6 +32,15 @@ def testAttr(testClass, obj, data):
             val = json.loads(val)
 
         testClass.assertEqual(val, getattr(obj, attr), msg=("[key]: %s, [left] %s, [right] %s" % (key, val, getattr(obj, attr)) ) )
+
+def testDict(testClass, d1, d2):
+    print d1
+    print d2
+    for k, v in d1.iteritems():
+        testClass.assertEquals(d1[k], d2[k])
+
+    for k, v in d2.iteritems():
+        testClass.assertEquals(d1[k], d2[k])
 
 ####### STATSTOOLS TEST #######
 class StatsToolsTest(TestCase):
@@ -199,6 +208,27 @@ class APITest(TestCase):
         self.assertEqual(before[0] + 1, after[0])
         self.assertEqual(before[1] + 1, after[1])
         testAttr(self, Kill.objects.all().order_by('-date')[0], kill)
+
+    def test_location(self):
+        location = {
+            'version' : '200',
+            'map' : 'ns2_python',
+            'message' : 'This is an awesome info',
+            'x' : 3.4,
+            'y' : 9.0,
+            'z' : 34.897
+        }
+
+        before = Location.objects.all().count()
+        self.client.post('/location', location)
+        after = Location.objects.all().count()
+
+        self.assertEqual(before + 1, after)
+        testAttr(self, Location.objects.all()[0], location)
+
+        locationsJSON = self.client.get('/location', {'version' : '200', 'map' : 'ns2_python'}).content
+        location_bis = json.loads(locationsJSON)[0]
+        testDict(self, location, location_bis)
 
     def test_cpu(self):
         cpu = {

@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^kill$', 'stats.api.kill'),
     url(r'^performance$', 'stats.api.performance'),
     url(r'^endgame$', 'stats.api.endgame'),
+    url(r'^location$', 'stats.api.location'),
     
     # website
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),

@@ -1,7 +1,57 @@
 from django.http import HttpResponse
-from stats.mongoModels import Kill, EndGame, Performance, CPU, Activity, Framerate
+from stats.mongoModels import Kill, EndGame, Performance, CPU, Activity, Framerate, Location
 
 import datetime, json
+
+def location(request):
+    if not request.method == 'POST':
+        if request.method == 'GET':
+
+            GET = request.GET
+            if not 'version' in GET and \
+                   'map' in GET: 
+                return HttpResponse('See the documentation')
+
+            locationQuery = Location.objects.all().filter(mapName=GET['map'], version=GET['version'])
+            
+            data = []
+            for l in locationQuery:
+                data.append({
+                    'map' : l.mapName,
+                    'version' : l.version,
+                    'x' : l.x,
+                    'y' : l.y,
+                    'z' : l.z,
+                    'message' : l.message
+                })
+
+
+            dataJSON = json.dumps(data)
+
+            return HttpResponse(dataJSON)
+
+        else:
+            return HttpResponse('See the documentation')
+
+    POST = request.POST
+    if not 'version' in POST and \
+           'x' in POST and \
+           'y' in POST and \
+           'z' in POST and \
+           'message' in POST and \
+           'map' in POST: 
+        return HttpResponse('See the documentation')
+
+    loc = Location()
+    loc.version = POST['version']
+    loc.mapName = POST['map']
+    loc.x = float(POST['x'])
+    loc.y = float(POST['y'])
+    loc.z = float(POST['z'])
+    loc.message = POST['message']
+    loc.save()
+
+    return HttpResponse('saved')
 
 def endgame(request):
     if not request.method == 'POST':
