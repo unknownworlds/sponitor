@@ -1,3 +1,16 @@
 Sponitor is a web application to store and process statistics data send by Spark Engine.
 The graph are display with web technology using the Google Charts API
 
+DEPENDENCIES
+============
+
+- MongoDB
+- Foreman
+- Python 2.7, and package specifies in requirements.txt
+
+INSTALL LOCAL STAGE
+===================
+
+- Create a settings_local.py file (fill the config as for settings_heroku.py)
+- Run: foreman start -f Procfile.dev
+
