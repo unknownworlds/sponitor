@@ -247,35 +247,65 @@ def killPie(request):
     
     killQuery = filterByMapAndVersion(killQuery, GET)
     
-    # Duel
+    t1 = killQuery.clone().filter(attacker_team=1)
+    t2 = killQuery.clone().filter(attacker_team=2)
+
     if 'type1' in GET and 'type2' in GET:
-        t1 = killQuery.clone().filter(attacker_type=GET['type1'],target_type=GET['type2']).count()
-        t2 = killQuery.clone().filter(attacker_type=GET['type2'],target_type=GET['type1']).count()
-        
-        data = { 
-            'data' : [
-                ['Marines', t1],
-                ['Aliens', t2]
-            ],
-            'colors' : [
-                '#3366cc',
-                '#dc3912'
-            ]
-        }
-    # General        
-    else:
-        t1 = killQuery.clone().filter(attacker_team=1).count()
-        t2 = killQuery.clone().filter(attacker_team=2).count()
-        data = { 
-            'data' : [
-                ['Marines', t1],
-                ['Aliens', t2]
-            ],
-            'colors' : [
-                '#3366cc',
-                '#dc3912'
-            ]
-        }
+        t1.filter(attacker_type=GET['type1'], target_type=GET['type2'])
+        t2.filter(attacker_type=GET['type2'], target_type=GET['type1'])
+
+    if 'weapon1' in GET and 'weapon2' in GET:
+        t1.filter(attacker_weapon=GET['weapon1'], target_weapon=GET['weapon2'])
+        t2.filter(attacker_weapon=GET['weapon2'], target_weapon=GET['weapon1'])
+
+    if 'weaponlevel1' in GET:
+        t1.filter(attacker_weaponlevel=GET['weaponlevel1'])
+        t2.filter(target_weaponlevel=GET['weaponlevel1'])
+
+    if 'weaponlevel2' in GET:
+        t2.filter(attacker_weaponlevel=GET['weaponlevel2'])
+        t1.filter(target_weaponlevel=GET['weaponlevel2'])
+
+    if 'armorlevel1' in GET:
+        t1.filter(attacker_armorlevel=GET['armorlevel1'])
+        t2.filter(target_armorlevel=GET['armorlevel1'])
+
+    if 'armorlevel2' in GET:
+        t2.filter(attacker_armorlevel=GET['armorlevel2'])
+        t1.filter(target_armorlevel=GET['armorlevel2'])
+
+    if 'upgrade1' in GET:
+        try:
+            upgrades = json.loads(GET['upgrades'])
+
+            for u in upgrades:
+                t1.filter(attacker_upgrade__all=u)
+                t2.filter(target_upgrade__all=u)
+        except:
+            t1.filter(attacker_upgrade__all=GET['upgrade1'])
+            t2.filter(target_upgrade__all=GET['upgrade1'])
+
+    if 'upgrade2' in GET:
+        try:
+            upgrades = json.loads(GET['upgrade2'])
+
+            for u in upgrades:
+                t2.filter(attacker_upgrade__all=u)
+                t1.filter(target_upgrade__all=u)
+        except:
+            t2.filter(attacker_upgrade__all=GET['upgrade2'])
+            t1.filter(target_upgrade__all=GET['upgrade2'])
+
+    data = { 
+        'data' : [
+            ['Marines', t1.count()],
+            ['Aliens', t2.count()]
+        ],
+        'colors' : [
+            '#3366cc',
+            '#dc3912'
+        ]
+    }
     
     dataJSON = json.dumps(data)
     return HttpResponse(dataJSON)
@@ -351,8 +381,14 @@ def killWeaponPie(request):
 @cache_page(60 * 60 * 2)
 def playerPerformance(request):
     versions = list(Framerate.objects.all().distinct('version'))
-    data = []
+    def safeInt(x):
+        try:
+            return int(x)
+        except:
+            return 0
+    versions = [ v for v in versions if safeInt(v) >= 208 ]
 
+    data = []
     for version in versions:
         query = Framerate.objects.all().filter(version=version)
         f = [ row.average for row in query]
@@ -360,7 +396,7 @@ def playerPerformance(request):
         percentiles = statsTools.quantiles(100, f)
 
         if len(percentiles) < 99:
-            break
+            continue
 
         data.append([
             version,
