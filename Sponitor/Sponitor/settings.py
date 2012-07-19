@@ -47,6 +47,22 @@ SESSION_ENGINE = 'mongoengine.django.sessions'
 ##### TESTS #####
 TEST_RUNNER = 'stats.testRunner.MongoTestRunner'
 
+##### LOGIN #####
+LOGIN_REDIRECT_URL = '/'
+
+##### CACHE #####
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake'
+    }
+}
+
+#----------------------------------------------------
+#---------------------------------------------------- END CUSTOM
+#----------------------------------------------------
+
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -145,14 +161,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
-
-##### CACHE #####
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake'
-    }
-}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
