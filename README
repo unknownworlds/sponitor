@@ -6,6 +6,7 @@ DEPENDENCIES
 
 - MongoDB
 - Foreman
+- MemCache
 - Python 2.7, and package specifies in requirements.txt
 
 INSTALL LOCAL STAGE

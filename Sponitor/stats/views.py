@@ -9,8 +9,7 @@ from django.contrib.auth.decorators import login_required
 from mongoengine.queryset import Q
 
 from stats.mongoModels import Kill, EndGame, Performance, CPU, Framerate
-from stats.util.helpers import findCategory
-from stats import statsTools
+from stats.helpers import findCategory, quantiles
 
 import json, math, datetime
 
@@ -393,7 +392,7 @@ def playerPerformance(request):
         query = Framerate.objects.all().filter(version=version)
         f = [ row.average for row in query]
         avg = query.average('average')
-        percentiles = statsTools.quantiles(100, f)
+        percentiles = quantiles(100, f)
 
         if len(percentiles) < 99:
             continue
