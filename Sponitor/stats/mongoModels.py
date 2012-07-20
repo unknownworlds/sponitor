@@ -134,6 +134,7 @@ class Performance(Document):
     address   = StringField(max_length=255)   
     serveravg = FloatField()    
     ents      = IntField()
+    gametime  = FloatField()
     clientmin = FloatField()
     clientmax = FloatField()
     clientavg = FloatField()    

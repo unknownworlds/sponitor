@@ -151,6 +151,7 @@ class APITest(TestCase):
             'map' : 'ns2_python',
             'serveravg' : 43,
             'ents' : 342,
+            'gametime' : 34.0,
             'clientmin' : 12,
             'clientmax' : 45,
             'clientavg' : 32

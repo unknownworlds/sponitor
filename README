@@ -15,3 +15,4 @@ INSTALL LOCAL STAGE
 - Create a settings_local.py file (fill the config as for settings_heroku.py)
 - Run: foreman start -f Procfile.dev
 
+(c) Copyright Unknown Worlds Entertainment Inc.s

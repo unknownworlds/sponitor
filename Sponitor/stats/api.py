@@ -210,6 +210,10 @@ def performance(request):
     perf.clientmax = float(POST['clientmax'])
     perf.clientavg = float(POST['clientavg'])
     perf.date = datetime.datetime.now()
+
+    if 'gametime' in POST:
+      perf.gametime = float(POST['gametime'])
+      
     perf.save()
 
     Activity.getTodayActivity().increment('performance').save()
