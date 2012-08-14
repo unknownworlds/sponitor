@@ -557,11 +557,12 @@ def filterByMapAndVersion(query, GET):
 
 def filterByLocation(query, GET):
     
-    if 'location1' in GET and 'location2' in GET:
-        location1 = GET['location1']
-        location2 = GET['location2']
-              
+    if 'location1' in GET:
+        location1 = GET['location1']              
         query = query.filter(start_location1=location1)
+
+    if 'location2' in GET:
+        location2 = GET['location2']
         query = query.filter(start_location2=location2)
         
     return query
