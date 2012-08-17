@@ -133,6 +133,7 @@ def winBar(request):
     
     q1 = endGameQuery.clone().filter(winner=1)
     q2 = endGameQuery.clone().filter(winner=2)
+    average = endGameQuery.clone().average('length')
     
     data1 = {} 
     for g in q1:
@@ -164,6 +165,7 @@ def winBar(request):
     
     data = {
         'data': data,
+        'average': int(average),
         'order': ['Marines','Aliens'],
         'colors' : [
                 '#3366cc',

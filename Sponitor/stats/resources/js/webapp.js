@@ -883,6 +883,8 @@ var DoubleBarView = ChartView.extend({
                 chart.draw(data, options);
                 
                 me.charts.push(chart);
+
+                me.$el.append('<p>Average: '+ parseInt(response.average / 60) +'</p>');
             }
         });
     }
