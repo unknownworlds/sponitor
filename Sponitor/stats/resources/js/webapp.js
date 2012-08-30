@@ -78,9 +78,11 @@ var configMaps = [{
 }, {
     name: 'ns2_rockdown'
 }, {
-    name: 'ns2_docking',
+    name: 'ns2_docking'
 }, {
     name: 'ns2_refining'
+}, {
+    name: 'ns2_veil'
 }];
 
 /* ----------------- Charts Config ------------------ */
