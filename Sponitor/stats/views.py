@@ -530,7 +530,7 @@ def mapList(request):
 @cache_page(60 * 60 * 2)
 def versionList(request):
     types = list(EndGame.objects.all().distinct('version'))
-    types = [ { 'name': t} for t in types]
+    types = [ { 'name': t} for t in types if t['name'].isdigit() ]
     types.sort(key=lambda t: int(t['name']))
     typesJSON = json.dumps(types)
     return HttpResponse(typesJSON)
