@@ -80,7 +80,7 @@ var configMaps = [{
 }, {
     name: 'ns2_docking'
 }, {
-    name: 'ns2_refining'
+    name: 'ns2_refinery'
 }, {
     name: 'ns2_veil'
 }];
