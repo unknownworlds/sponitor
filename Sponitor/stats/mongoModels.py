@@ -78,6 +78,7 @@ class EndGame(Document):
 
     meta = {
         'indexes' : ['version', 'winner', 'length', 'mapName', 'start_location1', 'start_location2', 'start_hive_tech'],
+        'allow_inheritance': False,
         'queryset_class': MyQuerySet
     }
     
@@ -96,6 +97,7 @@ class CPU(Document):
 
     meta = {
         'indexes' : ['cpubits', 'quality'],
+        'allow_inheritance': False,
         'queryset_class': MyQuerySet
     }
     
@@ -125,6 +127,7 @@ class Kill(Document):
 
     meta = {
         'indexes' : ['version', 'mapName', 'attacker_type', 'attacker_team', 'attacker_weapon', 'target_type', 'target_team', 'target_weapon', 'target_lifetime'],
+        'allow_inheritance': False,
         'queryset_class': MyQuerySet
     }
     
@@ -142,6 +145,7 @@ class Performance(Document):
 
     meta = {
         'indexes' : ['version', 'mapName', 'serveravg', 'ents', 'clientavg'],
+        'allow_inheritance': False,
         'queryset_class': MyQuerySet
     }
 
@@ -167,6 +171,7 @@ class Framerate(Document):
                 'unique' : True
             }
         ],
+        'allow_inheritance': False,
         'queryset_class': MyQuerySet
     }
 
@@ -206,6 +211,7 @@ class Activity(Document):
             'fields' : ('day',), 
             'unique' : True
         }],
+        'allow_inheritance': False,
         'queryset_class': MyQuerySet
     }
 
@@ -238,6 +244,7 @@ class Location(Document):
 
     meta = {
         'indexes' : ['version', 'mapName'],
+        'allow_inheritance': False,
         'queryset_class': MyQuerySet
     }
 
