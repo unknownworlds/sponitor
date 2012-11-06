@@ -25,11 +25,11 @@ urlpatterns = patterns('',
     # url(r'^types$', 'stats.views.typeList'),
     # url(r'^weapon$', 'stats.views.weaponList'),
     # url(r'^maps$', 'stats.views.mapList'),
-    # url(r'^versions$', 'stats.views.versionList'),
+    url(r'^versions$', 'stats.views.versionList'),
     
     # # Statistics
     # url(r'^resolution$', 'stats.views.resolution'),
-    # url(r'^win/pie$', 'stats.views.winPie'),
+    url(r'^win/pie$', 'stats.views.winPie'),
     # url(r'^win/bar$', 'stats.views.winBar'),
     # url(r'^win/distance$', 'stats.views.winDistanceBar'),
     # url(r'^kill/pie$', 'stats.views.killPie'),
