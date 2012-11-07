@@ -17,7 +17,7 @@ urlpatterns = patterns('',
 )
 
 if "SPONITOR_STAGE" in os.environ and os.environ["SPONITOR_STAGE"] == "frontend":
-    urlpatterns += patterns('', (
+    urlpatterns += patterns('',
         # website
         url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
         url(r'^logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
@@ -47,8 +47,8 @@ if "SPONITOR_STAGE" in os.environ and os.environ["SPONITOR_STAGE"] == "frontend"
         url(r'^cpucore$', 'stats.views.cpucore'),
         url(r'^cpuspeed$', 'stats.views.cpuspeed'),
         url(r'^lifetime$', 'stats.views.lifetime'),
-        url(r'^startlocationcount$', 'stats.views.startlocationCount')
-    ))
+        url(r'^startlocationcount$', 'stats.views.startlocationCount'),
+    )
 
 if not settings.DEBUG:
     urlpatterns += patterns('', (
