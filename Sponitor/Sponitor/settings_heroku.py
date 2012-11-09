@@ -2,9 +2,6 @@ import os
 
 STAGE = "production"
 
-if "SPONITOR" in os.environ and os.environ["SPONITOR"] == "heroku":
-    from settings_heroku import *
-
 DEBUG = False
 
 APP_ROOT = '/app/Sponitor/'
