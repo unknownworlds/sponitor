@@ -45,7 +45,7 @@ urlList = [{
 }, {
 	'url': '/location1'
 }, {
-	'url': 'location2'
+	'url': '/location2'
 }, {
 	'url': '/win/pie',
 	'data': {
