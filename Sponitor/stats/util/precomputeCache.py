@@ -25,7 +25,7 @@ except:
 	]
 
 try:
-	MAPS = json.loads(os.environ['NS2_VERSIONS'])
+	MAPS = json.loads(os.environ['NS2_MAPS'])
 except:
 	MAPS = [
 		"ns2_mineshaft", 
