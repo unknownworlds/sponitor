@@ -26,7 +26,7 @@ def flush(request):
     return HttpResponse('flushed')
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def winPie(request):
     GET = request.GET
     endGameQuery = EndGame.objects.all()
@@ -50,7 +50,7 @@ def winPie(request):
     return HttpResponse(dataJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 *60 *2)
+@cache_page(60 *60 * 25)
 def lifetime(request):
     GET = request.GET
     killQuery = Kill.objects.all()
@@ -68,7 +68,7 @@ def lifetime(request):
     return HttpResponse(dataJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 *60 *2)
+@cache_page(60 *60 * 25)
 def startlocationCount(request):
     GET = request.GET
     endQuery1 = EndGame.objects.all()
@@ -92,7 +92,7 @@ def startlocationCount(request):
     return HttpResponse(dataJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def resolution(request):
     cpuQuery = CPU.objects.all().scalar('res').fieldCount('res')
     r = [ [row['res'], row['res__count']]for row in list(cpuQuery)]
@@ -109,7 +109,7 @@ def resolution(request):
     return HttpResponse(dataJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def winBar(request):
     GET = request.GET
     endGameQuery = EndGame.objects.all()
@@ -176,7 +176,7 @@ def winBar(request):
     return HttpResponse(dataJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def winDistanceBar(request):
     GET = request.GET
     endGameQuery = EndGame.objects.all()
@@ -241,7 +241,7 @@ def winDistanceBar(request):
     return HttpResponse(dataJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def killPie(request):
     GET = request.GET
     killQuery = Kill.objects.all()
@@ -312,7 +312,7 @@ def killPie(request):
     return HttpResponse(dataJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def killWeaponPie(request):
     GET = request.GET
     killQuery = Kill.objects.all()
@@ -379,7 +379,7 @@ def killWeaponPie(request):
     return HttpResponse(dataJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def playerPerformance(request):
     versions = list(Framerate.objects.all().distinct('version'))
     def safeInt(x):
@@ -417,7 +417,7 @@ def playerPerformance(request):
     return HttpResponse(dataJSON)
         
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def gpu(request):
     cpuQuery = CPU.objects.all()
     nvidia = cpuQuery.clone().filter(gpu__startswith = 'NVIDIA').count()
@@ -438,7 +438,7 @@ def gpu(request):
     return HttpResponse(dataJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def cpucore(request):
     cpuQuery = CPU.objects.all().scalar('cpucores').fieldCount('cpucores')
     
@@ -450,7 +450,7 @@ def cpucore(request):
     return HttpResponse(dataJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def cpuspeed(request):
     cpuQuery = CPU.objects.all().scalar('cpuspeed')
     data = {}
@@ -468,7 +468,7 @@ def cpuspeed(request):
     return HttpResponse(dataJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def typeList(request):
     types = list(Kill.objects.all().distinct('attacker_type'))
     types = [{'name': t} for t in types]
@@ -476,7 +476,7 @@ def typeList(request):
     return HttpResponse(typesJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def startLocation1List(request):
     GET = request.GET
     
@@ -490,7 +490,7 @@ def startLocation1List(request):
     return HttpResponse(locationsJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def startLocation2List(request):
     GET = request.GET
     
@@ -504,7 +504,7 @@ def startLocation2List(request):
     return HttpResponse(locationsJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def weaponList(request):
     GET = request.GET
     killQuery = Kill.objects.all()
@@ -519,7 +519,7 @@ def weaponList(request):
     return HttpResponse(weaponsJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def mapList(request):
     types = list(EndGame.objects.all().distinct('mapName'))
     types = [ { 'name': t} for t in types]
@@ -527,7 +527,7 @@ def mapList(request):
     return HttpResponse(typesJSON)
 
 @login_required(login_url='/login/')
-@cache_page(60 * 60 * 2)
+@cache_page(60 * 60 * 25)
 def versionList(request):
     types = list(EndGame.objects.all().distinct('version'))
     types = [ { 'name': t} for t in types if t.isdigit() ]
