@@ -32,7 +32,7 @@ except:
 		"ns2_summit", 
 		"ns2_tram", 
 		"ns2_refinery",
-		"ns2_veil"
+		"ns2_veil",
 		"ns2_docking"
 	]
 
@@ -146,8 +146,8 @@ class StatsComputer:
 							result.append({
 								'url' : url,
 								'data' : {
-									'version': v,
-									'map': m
+									'version': json.dumps([str(v)]),
+									'map': json.dumps([str(m)])
 								}
 							})
 
@@ -155,7 +155,7 @@ class StatsComputer:
 						result.append({
 							'url' : url,
 							'data' : {
-								'map': m
+								'map': json.dumps([str(m)])
 							}
 						})
 
@@ -163,7 +163,7 @@ class StatsComputer:
 						result.append({
 							'url' : url,
 							'data' : {
-								'version': v,
+								'version': json.dumps([str(v)]),
 							}
 						})
 

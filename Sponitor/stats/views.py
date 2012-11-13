@@ -547,17 +547,13 @@ def filterByMapAndVersion(query, GET):
         query = query.filter(version__in=versions)
         
     if 'map' in GET:
-        if not GET['map'][0] in ('{', '[', '"'):
-            mapData = '"' + GET['map'] + '"'
-        else:
-            mapData = GET['map']
-
-        maps = json.loads( mapData )
+        maps = json.loads( GET['map'] )
         
         if not isinstance(maps, list):
             maps = [ maps ]
         
         maps = map(str, maps)
+        
         query = query.filter(mapName__in=maps)
         
     return query

@@ -55,8 +55,7 @@ LOGIN_REDIRECT_URL = '/'
 ##### CACHE #####
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake'
+        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache'
     }
 }
 
