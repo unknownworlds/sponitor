@@ -43,9 +43,15 @@ urlList = [{
 }, {
 	'url': '/types'
 }, {
-	'url': '/location1'
+	'url': '/location1',
+	'data' : {
+		'map' : '*'
+	}
 }, {
-	'url': '/location2'
+	'url': '/location2',
+	'data' : {
+		'map' : '*'
+	}
 }, {
 	'url': '/win/pie',
 	'data': {
@@ -164,6 +170,18 @@ class StatsComputer:
 							'url' : url,
 							'data' : {
 								'version': json.dumps([str(v)]),
+							}
+						})
+
+					result.append({
+						'url' : url
+					})
+				elif 'map' in data and data['map'] == '*':
+					for m in maps:
+						result.append({
+							'url' : url,
+							'data' : {
+								'map': json.dumps([str(m)])
 							}
 						})
 
