@@ -37,6 +37,8 @@ except:
 	]
 
 urlList = [{
+	'url': '/performance/graph'
+}, {
 	'url': '/versions'
 }, {
 	'url': '/maps'
