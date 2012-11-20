@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>NS2 Statistics App</title>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript" src="{% get_static_prefix %}js/lib/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="{% get_static_prefix %}js/lib/jquery.json-2.3.min.js"></script>
+		<script src="{% get_static_prefix %}js/lib/jquery-ui-1.8.18.custom.min.js"></script>
+		
+		<link rel="stylesheet" href="{% get_static_prefix %}css/suns-theme/jquery-ui-1.8.18.custom.css">		
+		<link rel="stylesheet" href="{% get_static_prefix %}css/webapp.css">
+
+		<style type="text/css">
+			body { 
+				font-family: Helvetica, Arial;
+				font-size: 20px;
+				text-align: center;
+			}
+			.marine { color: #3366CC;}
+			.alien { color: #DC3912;}
+			.number {font-size: 40px;}
+			.per {font-size: 70px;}
+		</style>
+		
+
+	</head>
+	<body>
+		{% if version %}
+			version:{{	version	}}</br>
+		{% endif %}
+		{% if map %}
+			map: {{	map	}}</br>
+		{% endif %}
+		limit: {{ limit }}</br>
+		<span class="marine per">{{ marine_per }}%</span><span class="per"> - </span><span class="alien per">{{ alien_per }}%</span></br>
+		<span class="marine number">{{ marine_count }}</span><span class="number"> - </span><span class="alien number">{{ alien_count }}</span></br>
+		<span class="marine">Marine</span> - <span class="alien">Alien</span>
+	</body>
+</html>

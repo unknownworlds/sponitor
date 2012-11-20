@@ -22,10 +22,8 @@ if "SPONITOR_STAGE" in os.environ and os.environ["SPONITOR_STAGE"] == "frontend"
         url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
         url(r'^logout/$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
         url(r'^$', 'stats.views.webapp'),
+        url(r'^win/$', 'stats.views.winPage'),
         
-        # Other
-        url(r'^flush$', 'stats.views.flush'),
-
         # data
         url(r'^type$', 'stats.views.typeList'),
         url(r'^location1$', 'stats.views.startLocation1List'),

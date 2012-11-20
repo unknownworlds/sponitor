@@ -26,6 +26,35 @@ def flush(request):
     return HttpResponse('flushed')
 
 @login_required(login_url='/login/')
+def winPage(request):
+    GET = request.GET
+
+    if 'limit' in GET:
+        limit = GET['limit']
+    else:
+        limit = 1000
+
+    endGameQuery = EndGame.objects.all()
+    endGameQuery = filterByMapAndVersion(endGameQuery, GET)
+    endGameQuery = endGameQuery.order_by('-date').limit(limit)
+    
+    t1 = 0
+    t2 = 0
+    for eg in endGameQuery:
+        if eg.winner == 1:
+            t1 += 1
+        elif eg.winner == 2:
+            t2 += 1
+
+    data = {'marine_count' : t1, 'alien_count' : t2,'marine_per' : t1 * 100 / limit, 'alien_per' : t2 * 100 / limit, 'limit' : limit}
+    if 'map' in GET:
+        data['map'] = GET['map']
+    if 'version' in GET:
+        data['version'] = GET['version']
+
+    return render_to_response('win.html', data)
+
+@login_required(login_url='/login/')
 @cache_page(60 * 60 * 25)
 def winPie(request):
     GET = request.GET
@@ -547,7 +576,10 @@ def filterByMapAndVersion(query, GET):
         query = query.filter(version__in=versions)
         
     if 'map' in GET:
-        maps = json.loads( GET['map'] )
+        mapName = GET['map']
+        if not mapName[0] in ('{', '[', '"'):
+            mapName = '"' + GET['map'] + '"'
+        maps = json.loads( mapName )
         
         if not isinstance(maps, list):
             maps = [ maps ]
